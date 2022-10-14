@@ -1,0 +1,81 @@
+version: '2.7'
+
+rpc:
+    listen: tcp://127.0.0.1:6001
+
+reload:
+    # sync interval
+    interval: 1s
+    # global patterns to sync
+    patterns: [ ".php" ]
+    # list of included for sync services
+    services:
+        http:
+            # recursive search for file patterns to add
+            recursive: true
+            # ignored folders
+            ignore: [ "vendor" ]
+            # service specific file pattens to sync
+            patterns: [ ".php", ".go", ".md" ]
+            # directories to sync. If recursive is set to true,
+            # recursive sync will be applied only to the directories in `dirs` section
+            dirs: [ "." ]
+
+server:
+    command: "php app.php"
+    relay: pipes
+    env:
+        -   XDEBUG_CONFIG: client_host=127.0.0.1 client_port=9000
+        -   PHP_IDE_CONFIG: serverName=spiral
+        -   XDEBUG_SESSION: start_with_request=yes
+
+http:
+    address: 0.0.0.0:8080
+    middleware: [ "gzip", "static", "websockets" ]
+    static:
+        dir: "public"
+        forbid: [ ".php", ".htaccess" ]
+    pool:
+        num_workers: 2
+        debug: true
+        supervisor:
+            max_worker_memory: 100
+    headers:
+        cors:
+            allowed_origin: "*"
+            allowed_headers: "*"
+            allowed_methods: "GET,HEAD,POST,PUT,PATCH,DELETE,OPTIONS"
+
+websockets:
+    broker: default
+    path: "/ws"
+
+broadcast:
+    default:
+        driver: memory
+        config: { }
+
+jobs:
+    consume: [ ]
+    pool:
+        num_workers: 2
+        supervisor:
+            max_worker_memory: 100
+
+kv:
+    local:
+        driver: memory
+        config:
+            interval: 60
+    redis:
+        driver: redis
+        config:
+            addrs:
+                - localhost:6379
+#grpc:
+#  listen: "tcp://localhost:9001"
+#  proto:
+#    - "first.proto"
+
+metrics:
+    address: localhost:2112

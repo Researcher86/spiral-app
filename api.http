@@ -1,0 +1,21 @@
+#Content-Type: application/json
+#Accept: application/json
+POST http://localhost:8080/users
+Content-Type: application/x-www-form-urlencoded
+
+name=John123&age=25
+###
+#{
+#    "name": "John",
+#    "age": 25
+#}
+
+POST http://localhost:8080/users
+Content-Type: application/json
+Accept: application/json
+
+{
+    "name": "John",
+    "age": 25
+}
+###
