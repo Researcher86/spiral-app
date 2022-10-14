@@ -35,7 +35,7 @@ Application bundle includes the following components:
 ## Installation
 
 ```bash
-composer create-project spiral/app
+composer i
 ```
 
 > Application server will be downloaded automatically (`php-curl` and `php-zip` required).
@@ -80,7 +80,3 @@ php app.php encrypt:key -m .env
 php app.php configure -vv
 ./vendor/bin/rr get-binary
 ```
-
-## License:
-
-MIT License (MIT). Please see [`LICENSE`](./LICENSE) for more information. Maintained by [Spiral Scout](https://spiralscout.com).
