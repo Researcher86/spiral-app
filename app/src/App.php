@@ -9,22 +9,18 @@ use App\Bootloader\MiddlewareBootloader;
 use Spiral\Boot\Bootloader\CoreBootloader;
 use Spiral\Bootloader as Framework;
 use Spiral\Bootloader\Http\ErrorHandlerBootloader;
-use Spiral\Broadcasting\Bootloader\BroadcastingBootloader;
-use Spiral\Broadcasting\Bootloader\WebsocketsBootloader;
+use Spiral\Cycle\Bootloader as CycleBridge;
 use Spiral\DotEnv\Bootloader as DotEnv;
 use Spiral\Framework\Kernel;
 use Spiral\Monolog\Bootloader as Monolog;
 use Spiral\Nyholm\Bootloader as Nyholm;
-use Spiral\Prototype\Bootloader as Prototype;
+use Spiral\RoadRunnerBridge\Bootloader as RoadRunnerBridge;
 use Spiral\Router\Bootloader\AnnotatedRoutesBootloader;
 use Spiral\Sapi\Bootloader\SapiBootloader;
 use Spiral\Scaffolder\Bootloader as Scaffolder;
 use Spiral\Stempler\Bootloader as Stempler;
-use Spiral\Cycle\Bootloader as CycleBridge;
-use Spiral\RoadRunnerBridge\Bootloader as RoadRunnerBridge;
 use Spiral\Tokenizer\Bootloader\TokenizerBootloader;
 use Spiral\Validation\Symfony\Bootloader\ValidatorBootloader;
-use Spiral\Views\Bootloader\ViewsBootloader;
 
 class App extends Kernel
 {
@@ -41,7 +37,6 @@ class App extends Kernel
     protected const LOAD = [
         // Logging and exceptions handling
         Monolog\MonologBootloader::class,
-        Bootloader\ExceptionHandlerBootloader::class,
         ErrorHandlerBootloader::class,
 
         // Application specific logs
@@ -94,8 +89,6 @@ class App extends Kernel
         // Entity checker
         // CycleBridge\ValidationBootloader::class,
 
-        // Views and view translation
-//        ViewsBootloader::class,
         Framework\Views\TranslatedCacheBootloader::class,
 
 

@@ -10,7 +10,7 @@ use Spiral\Bootloader\Http\HttpBootloader;
 
 class MiddlewareBootloader extends Bootloader
 {
-    public function boot(HttpBootloader $http)
+    public function boot(HttpBootloader $http): void
     {
         $http->addMiddleware(ValidationExceptionMiddleware::class);
     }

@@ -23,7 +23,7 @@ class UserController
             'Hello from Http Controller. UserId: ' . $id
         );
 
-        $this->jobQueue->push('sample::job', ['userId' => $id]);
+        $this->jobQueue->push('sample::job', ['userId' => $id . 5]);
 
         return [
             'status' => 201,

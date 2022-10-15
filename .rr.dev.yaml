@@ -20,6 +20,16 @@ reload:
             # directories to sync. If recursive is set to true,
             # recursive sync will be applied only to the directories in `dirs` section
             dirs: [ "." ]
+        jobs:
+            # recursive search for file patterns to add
+            recursive: true
+            # ignored folders
+            ignore: [ "vendor" ]
+            # service specific file pattens to sync
+            patterns: [ ".php", ".go", ".md" ]
+            # directories to sync. If recursive is set to true,
+            # recursive sync will be applied only to the directories in `dirs` section
+            dirs: [ "." ]
 
 server:
     command: "php app.php"
@@ -36,8 +46,8 @@ http:
         dir: "public"
         forbid: [ ".php", ".htaccess" ]
     pool:
-        num_workers: 2
-        debug: true
+        num_workers: 1
+#        debug: true
         supervisor:
             max_worker_memory: 100
     headers:
@@ -58,7 +68,7 @@ broadcast:
 jobs:
     consume: [ ]
     pool:
-        num_workers: 2
+        num_workers: 1
         supervisor:
             max_worker_memory: 100
 

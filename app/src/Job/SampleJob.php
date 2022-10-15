@@ -15,7 +15,7 @@ class SampleJob extends JobHandler
     public function invoke(BroadcastInterface $broadcast, string $userId): void
     {
         echo 'Start WebSocket Broadcast...';
-        sleep(10);
+        sleep(1);
         $broadcast->publish(
             'user.5',
             'Hello from Background Job. UserId: ' . $userId
