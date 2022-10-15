@@ -6,6 +6,7 @@ namespace App;
 
 use App\Bootloader;
 use App\Bootloader\MiddlewareBootloader;
+use App\Bootloader\ViewRendererBootloader;
 use Spiral\Boot\Bootloader\CoreBootloader;
 use Spiral\Bootloader as Framework;
 use Spiral\Bootloader\Http\ErrorHandlerBootloader;
@@ -39,6 +40,8 @@ class App extends Kernel
         Monolog\MonologBootloader::class,
         ErrorHandlerBootloader::class,
 
+        Bootloader\ExceptionHandlerBootloader::class,
+
         // Application specific logs
         Bootloader\LoggingBootloader::class,
 
@@ -67,6 +70,7 @@ class App extends Kernel
         Framework\Http\SessionBootloader::class,
         Framework\Http\CsrfBootloader::class,
         Framework\Http\PaginationBootloader::class,
+        Framework\Http\ErrorHandlerBootloader::class,
         SapiBootloader::class,
 
         // Databases
