@@ -5,19 +5,25 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use App\CQRS\command\User\Create\CreateCommand;
+use Psr\SimpleCache\CacheInterface;
 use Spiral\Broadcasting\BroadcastInterface;
 use Spiral\Queue\QueueInterface;
 use Spiral\Router\Annotation\Route;
 
 class UserController
 {
-    public function __construct(private readonly BroadcastInterface $broadcast, private readonly QueueInterface $jobQueue)
-    {
+    public function __construct(
+        private readonly BroadcastInterface $broadcast,
+        private readonly QueueInterface $jobQueue,
+        private readonly CacheInterface $cache
+    ) {
     }
 
     #[Route(route: '/users/<id>', methods: 'GET', group: 'api')]
     public function get(string $id): array
     {
+        $this->cache->set('controller', (int) $id);
+
         $this->broadcast->publish(
             'user.5',
             'Hello from Http Controller. UserId: ' . $id

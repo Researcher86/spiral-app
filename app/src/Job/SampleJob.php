@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Job;
 
+use Psr\SimpleCache\CacheInterface;
 use Spiral\Broadcasting\BroadcastInterface;
 use Spiral\Queue\JobHandler;
 
@@ -12,9 +13,12 @@ use Spiral\Queue\JobHandler;
  */
 class SampleJob extends JobHandler
 {
-    public function invoke(BroadcastInterface $broadcast, string $userId): void
+    public function invoke(BroadcastInterface $broadcast, CacheInterface $cache,  string $userId): void
     {
-        echo 'Start WebSocket Broadcast...';
+        echo 'Start WebSocket Broadcast...' . PHP_EOL;
+        echo 'Data from cache: ' . $cache->get('controller');
+
+
         sleep(1);
         $broadcast->publish(
             'user.5',

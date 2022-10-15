@@ -1,4 +1,4 @@
-export XDEBUG_CONFIG=client_host=127.0.0.1 client_port=9000
+#export XDEBUG_CONFIG=client_host=127.0.0.1 client_port=9000
 export PHP_IDE_CONFIG=serverName=spiral
 export XDEBUG_SESSION=start_with_request=yes
 
