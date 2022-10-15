@@ -4,9 +4,14 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use App\CQRS\command\User\Create\CreateCommand;
+use App\CQRS\command\User\Create\CreateUserCommand;
+use App\CQRS\command\User\Create\CreateUserCommandHandler;
+use App\CQRS\Query\User\GetUserById\GetUserByIdQuery;
+use Psr\EventDispatcher\EventDispatcherInterface;
 use Psr\SimpleCache\CacheInterface;
 use Spiral\Broadcasting\BroadcastInterface;
+use Spiral\Cqrs\CommandBusInterface;
+use Spiral\Cqrs\QueryBusInterface;
 use Spiral\Queue\QueueInterface;
 use Spiral\Router\Annotation\Route;
 
@@ -15,7 +20,9 @@ class UserController
     public function __construct(
         private readonly BroadcastInterface $broadcast,
         private readonly QueueInterface $jobQueue,
-        private readonly CacheInterface $cache
+        private readonly CacheInterface $cache,
+        private readonly CommandBusInterface $commandBus,
+        private readonly QueryBusInterface $queryBus,
     ) {
     }
 
@@ -31,10 +38,13 @@ class UserController
 
         $this->jobQueue->push('sample::job', ['userId' => $id . 5]);
 
+        $this->commandBus->dispatch(new CreateUserCommand('John', 35));
+        $result = $this->queryBus->ask(new GetUserByIdQuery($id));
+
         return [
             'status' => 201,
             'data'   => [
-                'id' => $id
+                'id' => $result
             ]
         ];
     }
@@ -46,7 +56,7 @@ class UserController
     }
 
     #[Route(route: '/users', methods: 'POST', group: 'api')]
-    public function create(CreateCommand $command): array
+    public function create(CreateUserCommand $command): array
     {
         return ['Ok'];
     }

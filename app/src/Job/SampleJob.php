@@ -16,7 +16,8 @@ class SampleJob extends JobHandler
     public function invoke(BroadcastInterface $broadcast, CacheInterface $cache,  string $userId): void
     {
         echo 'Start WebSocket Broadcast...' . PHP_EOL;
-        echo 'Data from cache: ' . $cache->get('controller');
+        echo 'Data from controller: ' . $cache->get('controller');
+        echo 'Data from handler: ' . $cache->get('handler');
 
 
         sleep(1);

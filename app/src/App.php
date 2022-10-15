@@ -10,9 +10,12 @@ use App\Bootloader\ViewRendererBootloader;
 use Spiral\Boot\Bootloader\CoreBootloader;
 use Spiral\Bootloader as Framework;
 use Spiral\Bootloader\Http\ErrorHandlerBootloader;
+use Spiral\Cqrs\Bootloader\CqrsBootloader;
 use Spiral\Cycle\Bootloader as CycleBridge;
 use Spiral\DotEnv\Bootloader as DotEnv;
+use Spiral\Events\Bootloader\EventsBootloader;
 use Spiral\Framework\Kernel;
+use Spiral\League\Event\Bootloader\EventBootloader;
 use Spiral\Monolog\Bootloader as Monolog;
 use Spiral\Nyholm\Bootloader as Nyholm;
 use Spiral\RoadRunnerBridge\Bootloader as RoadRunnerBridge;
@@ -39,6 +42,10 @@ class App extends Kernel
         // Logging and exceptions handling
         Monolog\MonologBootloader::class,
         ErrorHandlerBootloader::class,
+
+        EventsBootloader::class,
+        EventBootloader::class,
+        CqrsBootloader::class,
 
         Bootloader\ExceptionHandlerBootloader::class,
 

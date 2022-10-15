@@ -18,6 +18,8 @@
         "php": ">=8.1",
         "ext-mbstring": "*",
         "doctrine/collections": "^1.6",
+        "spiral-packages/cqrs": "^2.1",
+        "spiral-packages/league-event": "^1.0",
         "spiral-packages/symfony-validator": "^1.2",
         "spiral/annotated-routes": "^3.1",
         "spiral/cycle-bridge": "^2.0",
