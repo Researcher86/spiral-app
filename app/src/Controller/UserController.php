@@ -29,7 +29,7 @@ class UserController
     #[Route(route: '/users/<id>', methods: 'GET', group: 'api')]
     public function get(string $id): array
     {
-        $this->cache->set('controller', (int) $id);
+        $this->cache->set('controller', $id);
 
         $this->broadcast->publish(
             'user.5',

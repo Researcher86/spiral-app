@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace App;
 
 use App\Bootloader;
-use App\Bootloader\MiddlewareBootloader;
+use App\Bootloader\DebugMiddlewareBootloader;
+use App\Bootloader\ValidationMiddlewareBootloader;
 use App\Bootloader\ViewRendererBootloader;
 use Spiral\Boot\Bootloader\CoreBootloader;
 use Spiral\Bootloader as Framework;
@@ -22,6 +23,7 @@ use Spiral\RoadRunnerBridge\Bootloader as RoadRunnerBridge;
 use Spiral\Router\Bootloader\AnnotatedRoutesBootloader;
 use Spiral\Sapi\Bootloader\SapiBootloader;
 use Spiral\Scaffolder\Bootloader as Scaffolder;
+use Spiral\Scheduler\Bootloader\SchedulerBootloader;
 use Spiral\Stempler\Bootloader as Stempler;
 use Spiral\Tokenizer\Bootloader\TokenizerBootloader;
 use Spiral\Validation\Symfony\Bootloader\ValidatorBootloader;
@@ -42,6 +44,7 @@ class App extends Kernel
         // Logging and exceptions handling
         Monolog\MonologBootloader::class,
 //        ErrorHandlerBootloader::class,
+        SchedulerBootloader::class,
 
         EventsBootloader::class,
         EventBootloader::class,
@@ -119,7 +122,8 @@ class App extends Kernel
 
         AnnotatedRoutesBootloader::class,
         Bootloader\APIRoutes::class,
-        MiddlewareBootloader::class,
+        DebugMiddlewareBootloader::class,
+        ValidationMiddlewareBootloader::class,
 
         // WebSocket
         // https://github.com/roadrunner-server/roadrunner/discussions/1203

@@ -1,6 +1,15 @@
 #export XDEBUG_CONFIG=client_host=127.0.0.1 client_port=9000
-export PHP_IDE_CONFIG=serverName=spiral
-export XDEBUG_SESSION=start_with_request=yes
+#export PHP_IDE_CONFIG=serverName=spiral
+#export XDEBUG_SESSION=start_with_request=yes
+
+up:
+	docker-compose up -d
+
+down:
+	docker-compose down -v
+
+logs:
+	docker-compose logs
 
 test:
 	vendor/bin/phpunit --colors=always --testdox
@@ -12,7 +21,8 @@ run:
 	./rr serve
 
 run-debug:
-	./rr serve -c .rr.dev.yaml  -o "server.command=php -dxdebug.mode=debug -dxdebug.client_port=9000 -dxdebug.client_host=127.0.0.1 app.php"
+	#./rr serve -c .rr.dev.yaml  -o "server.command=php -dxdebug.mode=debug -dxdebug.client_port=9000 -dxdebug.client_host=127.0.0.1 app.php"
+	./rr serve -c .rr.dev.yaml  -o "server.command=php -dxdebug.mode=debug app.php"
 
 workers:
 	./rr workers -i

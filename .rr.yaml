@@ -38,6 +38,14 @@ jobs:
         supervisor:
             max_worker_memory: 100
 
+service:
+    cron_worker:
+        command: "php app.php schedule:work"
+        process_num: 1
+        exec_timeout: 0
+        remain_after_exit: true
+        restart_sec: 1
+
 kv:
     local:
         driver: memory
