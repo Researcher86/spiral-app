@@ -41,7 +41,7 @@ class App extends Kernel
     protected const LOAD = [
         // Logging and exceptions handling
         Monolog\MonologBootloader::class,
-        ErrorHandlerBootloader::class,
+//        ErrorHandlerBootloader::class,
 
         EventsBootloader::class,
         EventBootloader::class,

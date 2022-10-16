@@ -12,18 +12,24 @@ use Symfony\Component\Validator\Constraints;
 
 class CreateUserCommand extends AttributesFilter implements CommandInterface
 {
-    public function __construct(
-        #[Post]
+    #[Post]
 //    #[Data]
-        #[Constraints\NotBlank]
-        #[Constraints\Length(min: 5)]
-        public string $name,
+    #[Constraints\NotBlank]
+    #[Constraints\Length(min: 5)]
+    public string $name;
 
-        #[Post]
+    #[Post]
 //    #[Data]
-        #[Constraints\NotBlank]
-        #[Constraints\Positive]
-        public int $age
-    ) {
+    #[Constraints\NotBlank]
+    #[Constraints\Positive]
+    public int $age;
+
+    public static function create(string $name, int $gage): self
+    {
+        $command = new self();
+        $command->name = $name;
+        $command->age = $gage;
+
+        return $command;
     }
 }

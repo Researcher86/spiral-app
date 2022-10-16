@@ -18,6 +18,7 @@
         "php": ">=8.1",
         "ext-mbstring": "*",
         "doctrine/collections": "^1.6",
+        "filp/whoops": "^2.14",
         "spiral-packages/cqrs": "^2.1",
         "spiral-packages/league-event": "^1.0",
         "spiral-packages/symfony-validator": "^1.2",

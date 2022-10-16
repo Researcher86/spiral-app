@@ -38,7 +38,7 @@ class UserController
 
         $this->jobQueue->push('sample::job', ['userId' => $id . 5]);
 
-        $this->commandBus->dispatch(new CreateUserCommand('John', 35));
+        $this->commandBus->dispatch(CreateUserCommand::create('John', 35));
         $result = $this->queryBus->ask(new GetUserByIdQuery($id));
 
         return [
