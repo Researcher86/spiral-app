@@ -55,7 +55,7 @@ kv:
         driver: redis
         config:
             addrs:
-                - localhost:6379
+                - redis:6379
 #grpc:
 #  listen: "tcp://localhost:9001"
 #  proto:

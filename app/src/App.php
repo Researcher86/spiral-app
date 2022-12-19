@@ -121,7 +121,7 @@ class App extends Kernel
         RoadRunnerBridge\CommandBootloader::class,
 
         AnnotatedRoutesBootloader::class,
-        Bootloader\APIRoutes::class,
+//        Bootloader\APIRoutes::class,
         DebugMiddlewareBootloader::class,
         ValidationMiddlewareBootloader::class,
 

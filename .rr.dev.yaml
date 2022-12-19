@@ -45,7 +45,7 @@ server:
     command: "php app.php"
     relay: pipes
     env:
-        -   XDEBUG_CONFIG: client_host=127.0.0.1 client_port=9000
+        -   XDEBUG_CONFIG: client_host=172.22.0.1 client_port=9000
         -   PHP_IDE_CONFIG: serverName=spiral
         -   XDEBUG_SESSION: start_with_request=yes
 
@@ -89,7 +89,7 @@ jobs:
 service:
     cron_worker:
         env:
-            XDEBUG_CONFIG: client_host=127.0.0.1 client_port=9000
+            XDEBUG_CONFIG: client_host=172.22.0.1 client_port=9000
             PHP_IDE_CONFIG: serverName=spiral
             XDEBUG_SESSION: start_with_request=yes
         command: "php -dxdebug.mode=debug app.php schedule:work"
@@ -107,7 +107,7 @@ kv:
         driver: redis
         config:
             addrs:
-                - localhost:6379
+                - redis:6379
 #grpc:
 #  listen: "tcp://localhost:9001"
 #  proto:
