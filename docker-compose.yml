@@ -2,15 +2,17 @@ version: "3.1"
 
 services:
     php:
-      build:
-        context: .
-        dockerfile: Dockerfile
-      restart: unless-stopped
-      tty: true
-      ports:
-        - "8080:8080"
-      volumes:
-        - ./:/app/
+        build:
+            context: .
+            dockerfile: Dockerfile
+        restart: unless-stopped
+        tty: true
+        ports:
+            - "8080:8080"
+        volumes:
+            - ./:/app/
+        networks:
+            - spiral-app
 
     mysql:
         image: mysql:8
@@ -26,6 +28,8 @@ services:
             - "3308:3306"
         volumes:
             - mysql-data:/var/lib/mysql
+        networks:
+            - spiral-app
 
     redis:
         image: redis:6.0
@@ -34,6 +38,8 @@ services:
           - "6379:6379"
         volumes:
             - redis-data:/data
+        networks:
+            - spiral-app
 
     rabbitmq:
         image: rabbitmq:3.8-management
@@ -43,8 +49,17 @@ services:
         environment:
             RABBITMQ_DEFAULT_USER: guest
             RABBITMQ_DEFAULT_PASS: guest
+        networks:
+          - spiral-app
 
 volumes:
     mysql-data: { }
     redis-data: { }
 
+networks:
+    spiral-app:
+        driver: bridge
+        ipam:
+            driver: default
+            config:
+                - subnet: 150.150.150.0/28

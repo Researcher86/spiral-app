@@ -45,7 +45,7 @@ server:
     command: "php app.php"
     relay: pipes
     env:
-        -   XDEBUG_CONFIG: client_host=172.22.0.1 client_port=9000
+        -   XDEBUG_CONFIG: client_host=150.150.150.1 client_port=9000
         -   PHP_IDE_CONFIG: serverName=spiral
         -   XDEBUG_SESSION: start_with_request=yes
 
@@ -89,9 +89,9 @@ jobs:
 service:
     cron_worker:
         env:
-            XDEBUG_CONFIG: client_host=172.22.0.1 client_port=9000
+            XDEBUG_CONFIG: client_host=150.150.150.1 client_port=9000
             PHP_IDE_CONFIG: serverName=spiral
-            XDEBUG_SESSION: start_with_request=yes
+#            XDEBUG_SESSION: start_with_request=yes
         command: "php -dxdebug.mode=debug app.php schedule:work"
         process_num: 1
         exec_timeout: 0

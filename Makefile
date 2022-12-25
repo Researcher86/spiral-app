@@ -38,4 +38,5 @@ php:
 
 bench:
     # https://github-wiki-see.page/m/giltene/wrk2/wiki/Installing-wrk2-on-Linux#:~:text=Installing%20wrk2%20on,wrk%20and%20build.
-	wrk -c2000 -t200 -R5000 http://localhost:8080/users/5
+	#wrk -c2000 -t200 -R5000 http://localhost:8080/users/5
+	wrk -c2000 -t200 -R5000 http://localhost:8080/users
